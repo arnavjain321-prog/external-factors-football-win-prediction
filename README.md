@@ -1,175 +1,155 @@
-Weather & Match Conditions – Predicting Home Win Probability (Machine Learning Analysis)
+Weather & Match Conditions — Predicting Home Win Probability (Machine Learning Analysis)
 Executive Summary
 
-This project builds a logistic regression model to estimate home win probability using weather, travel distance, and bookmaker expectations.
-By pairing structured match-level features with interaction-effect visualizations, the analysis reveals how external conditions influence match outcomes beyond typical team-strength indicators.
+This project builds an interpretable machine-learning model to estimate home win probability using external match conditions: weather, travel distance, implied team strength, attendance context, and rest patterns.
+The goal is to understand how these non-tactical factors influence match outcomes and to demonstrate a modern football-analytics modeling workflow.
 
-The goal is to demonstrate a modern analytics workflow—including feature engineering, model evaluation, calibration, and counterfactual heatmaps—while providing interpretable insights relevant to football performance analysis and predictive modeling departments.
+The workflow includes data processing, feature engineering, logistic regression with standardized effects, probability calibration, model comparison, and counterfactual interaction visualizations.
 
 1. Why This Analysis Matters
 
-Match performance is influenced by more than tactics and lineups.
-Environmental and logistical factors meaningfully shape outcomes through:
+Match performance depends on more than tactics and player quality.
+External conditions shape performance through:
 
-Physical strain from travel demands
+Physical strain from long-distance travel
 
-Reduced efficiency under extreme temperature/humidity
+Reduced efficiency under high humidity, heat, or wind
 
-Discrepancies between bookmaker expectations and actual conditions
+Discrepancies between bookmaker expectations and environmental realities
 
-Match tempo and fatigue patterns affected by weather
+Attendance, rest days, and scheduling dynamics
 
-This project investigates how these factors interact and provides a structured framework for incorporating them into predictive pipelines.
+Contextual effects that combine in non-linear ways
+
+This project quantifies these influences and provides a structure for integrating external-condition modeling into football analytics pipelines.
 
 2. Data Sources
 
-Match-level data containing results and bookmaker implied probabilities
+Match-level results and kickoff context
 
-Weather data merged by match location and date
+Weather outputs merged by stadium + date
 
-Travel distance computed from team origin → stadium
+Betting-odds implied probabilities
 
-Target variable: home win (1) or non-win (0)
+Travel distance (km, computed via team origin → venue)
 
-All processed tables are stored inside the data/ directory.
+Contextual variables: attendance ratio, windspeed, rest days
+
+Processed files are stored in the data/processed directory.
 
 3. Repository Structure
-EXTERNAL-FACTORS-FOOTBALL-MODELING/
-│
-├── data/
-│   ├── processed/
-│   │   └── matches_modeling_dataset.csv
-│   │
-│   └── raw/
-│       ├── 1_venue.csv
-│       ├── 5_odds.csv
-│       ├── leagues_more.csv
-│       └── weather_output.csv
-│
-├── notebooks/
-│   ├── 01_data_processing.ipynb
-│   ├── 02_modeling.ipynb
-│   └── 03_reporting.ipynb
-│
-├── visuals/
-│   ├── calibration_curve_gradient_boosting.png
-│   ├── calibration_curve_logistic_regression.png
-│   ├── confusion_matrix_catboost.png
-│   ├── confusion_matrix_gradient_boosting.png
-│   ├── confusion_matrix_logistic_regression.png
-│   ├── confusion_matrix_random_forest.png
-│   ├── feature_importance_std_effects.png
-│   ├── interaction_temp_humidity.png
-│   ├── interaction_travel_bookmaker.png
-│   ├── pdp_attendance_ratio.png
-│   ├── pdp_humidity.png
-│   ├── pdp_p_home_implied.png
-│   ├── pdp_temp.png
-│   ├── pdp_travel_km.png
-│   ├── pdp_windspeed.png
-│   ├── roc_curve_logistic_regression.png
-│   └── roc_curves_all_models.png
-│
-├── .gitignore
-├── LICENSE
-└── README.md
 
+data/
+• processed:
+ – matches_modeling_dataset.csv
+• raw:
+ – 1_venue.csv
+ – 5_odds.csv
+ – leagues_more.csv
+ – weather_output.csv
 
-Notebook Workflow
+notebooks/
+• 01_data_processing.ipynb
+• 02_modeling.ipynb
+• 03_reporting.ipynb
 
-01_clean_data.ipynb – Raw data import + merging
-02_feature_engineering.ipynb – Per-match & contextual features
-03_model_training.ipynb – Logistic regression + CV
-04_evaluation.ipynb – ROC, calibration, confusion matrix
-05_interaction_effects.ipynb – Counterfactual heatmaps
+visuals/
+• Calibration curves
+• Confusion matrices (multiple models)
+• Feature importance (standardized effects)
+• Interaction heatmaps (temp × humidity, travel × bookmaker)
+• PDP plots (temp, humidity, travel_km, implied probability, windspeed, attendance ratio)
+• ROC curves (single model + all-models comparison)
+
+root files
+• .gitignore
+• LICENSE
+• README.md
 
 4. Modeling Overview
 
-The predictive pipeline includes:
+This analysis uses an interpretable predictive pipeline:
 
-Logistic Regression (selected as best-performing model)
+Logistic Regression (final selected model)
 
-Standardization of continuous features
+Standardized feature effects
 
-Cross-validation for regularization strength
+Train/test split + cross-validation
 
-Probability calibration evaluation
+Probability calibration (reliability curves)
 
-Interaction effects via controlled variable grids
+ROC/AUC comparison across multiple models
 
-Features Used
+Counterfactual heatmaps for understanding non-linear interactions
 
-Weather Variables
+Partial dependence analysis for marginal effects
+
+Feature Groups
+
+Weather
 
 Temperature
 
 Humidity
 
-Category-based weather indicators
+Windspeed
 
-Context & Expectation Variables
+Weather category indicators
 
-Bookmaker implied probability
+Contextual / Matchday
 
-Home/away flags
+Attendance ratio
 
-Travel Variables
+Rest days
+
+Team Strength Proxy
+
+Home-team implied probability from bookmaker odds
+
+Travel
 
 Travel distance (km)
 
-Interaction: travel × bookmaker probability
+Interactions with implied team strength
 
-5. Visualizations
+5. Visual Examples
+Feature Importance (Standardized Effects)
 
-Below is a summary of the primary visuals included in the analysis:
+Interaction — Temperature × Humidity
 
-Model Diagnostics
+Interaction — Travel × Bookmaker Implied Probability
 
-Confusion Matrix
+ROC Curve (Logistic Regression)
 
-ROC Curve
-
-Calibration Curve
-
-Standardized Feature Importance
-
-Interaction Effects
-
-Temperature × Humidity
-Visualizes how combined environmental conditions modify home win probability under typical match settings.
-
-Travel Distance × Bookmaker Implied Probability
-Evaluates how travel burden interacts with market expectations.
-
-These figures are stored in visuals/.
+Partial Dependence — Temperature
 
 6. Key Insights
 
-1. Environmental conditions influence performance.
-High humidity and extreme temperature depress predicted win probability even when controlling for team strength.
+1. Weather conditions materially impact results.
+Extreme humidity or heat suppresses predicted home win odds even after accounting for team strength.
 
-2. Travel distance consistently penalizes outcomes.
-Teams facing longer travel show lower predicted likelihood of winning at home.
+2. Travel burden imposes a measurable penalty.
+Long travel distances reduce modeled win probability, especially when paired with challenging weather.
 
-3. Bookmaker probabilities are strong predictors but incomplete.
-The model identifies several matches where weather or logistical factors shift actual probabilities away from implied odds.
+3. Bookmaker implied probability is strong but not sufficient.
+Environmental and situational factors create real deviations from market expectations.
 
 4. Interaction effects reveal compound disadvantages.
-Weather and travel effects are not independent—certain combinations cause sharp declines in modeled win probability.
+Weather + travel + kickoff context generate effects far larger than individual variables alone.
 
 7. Limitations & Future Work
 
-Integrating player availability and lineup-specific metrics
+Add lineup-level features (player availability, fatigue)
 
-Adding expected-goal differential or underlying performance data
+Integrate xG-based team form inputs
 
-Testing non-linear models (random forest, XGBoost)
+Explore non-linear models (XGBoost, Random Forests)
 
-Deploying the probability model via a lightweight API
+Develop a real-time prediction dashboard or API
 
 8. License
 
-This project is released under the MIT License.
+Released under the MIT License.
 
 9. Author
 
