@@ -126,19 +126,19 @@ Partial Dependence — Temperature
 ## Visual Examples
 
 ### Feature Importance (Standardized Effects)
-![feature_importance](visuals/feature_importance_std_effects.png)
+<img src="visuals/feature_importance_std_effects.png" width="600"/>
 
-### Interaction Effect — Temperature × Humidity
-![temp_humidity](visuals/interaction_temp_humidity.png)
+### Interaction — Temperature × Humidity
+<img src="visuals/interaction_temp_humidity.png" width="600"/>
 
-### Interaction Effect — Travel Distance × Bookmaker Probability
-![travel_bookmaker](visuals/interaction_travel_bookmaker.png)
+### Interaction — Travel Distance × Bookmaker Probability
+<img src="visuals/interaction_travel_bookmaker.png" width="600"/>
 
 ### ROC Curve (Logistic Regression)
-![roc_logit](visuals/roc_curve_logistic_regression.png)
+<img src="visuals/roc_curve_logistic_regression.png" width="600"/>
 
 ### Partial Dependence — Temperature
-![pdp_temp](visuals/pdp_temp.png)
+<img src="visuals/pdp_temp.png" width="600"/>
 
 
 6. Key Insights
