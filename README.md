@@ -25,17 +25,24 @@ This project quantifies these influences and provides a structure for integratin
 
 2. Data Sources
 
-Match-level results and kickoff context
+The datasets used in this project were derived from the following sources:
 
-Weather outputs merged by stadium + date
+- **Primary match + odds dataset:**  
+  Enrico Cattaneo — *Football Match Prediction Dataset* (Kaggle).  
+  Available at: https://www.kaggle.com/datasets/enricocattaneo/data-football-match-prediction  
+  Used for: match outcomes, home/away identifiers, bookmaker implied probabilities, venue metadata.
 
-Betting-odds implied probabilities
+- **Weather data:**  
+  Weather variables (temperature, humidity, windspeed, conditions) obtained from the processed  
+  `weather_output.csv` file, originally generated using Open-Meteo API calls matched by stadium and date.
 
-Travel distance (km, computed via team origin → venue)
+- **Venue & league metadata:**  
+  Additional structural context from the raw tables:  
+  `1_venue.csv`, `leagues_more.csv`, and `5_odds.csv`.
 
-Contextual variables: attendance ratio, windspeed, rest days
+All cleaned feature tables are available in:  
+`data/processed/matches_modeling_dataset.csv`.
 
-Processed files are stored in the data/processed directory.
 
 3. Repository Structure
 
@@ -176,23 +183,4 @@ Arnav Jain
 Master’s in Data Science (University of Virginia)
 LinkedIn: https://www.linkedin.com/in/arnavjain2026
 
-## Data Sources
-
-The datasets used in this project were derived from the following sources:
-
-- **Primary match + odds dataset:**  
-  Enrico Cattaneo — *Football Match Prediction Dataset* (Kaggle).  
-  Available at: https://www.kaggle.com/datasets/enricocattaneo/data-football-match-prediction  
-  Used for: match outcomes, home/away identifiers, bookmaker implied probabilities, venue metadata.
-
-- **Weather data:**  
-  Weather variables (temperature, humidity, windspeed, conditions) obtained from the processed  
-  `weather_output.csv` file, originally generated using Open-Meteo API calls matched by stadium and date.
-
-- **Venue & league metadata:**  
-  Additional structural context from the raw tables:  
-  `1_venue.csv`, `leagues_more.csv`, and `5_odds.csv`.
-
-All cleaned feature tables are available in:  
-`data/processed/matches_modeling_dataset.csv`.
 
