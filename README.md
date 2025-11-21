@@ -123,6 +123,24 @@ ROC Curve (Logistic Regression)
 
 Partial Dependence — Temperature
 
+## Visual Examples
+
+### Feature Importance (Standardized Effects)
+![feature_importance](visuals/feature_importance_std_effects.png)
+
+### Interaction Effect — Temperature × Humidity
+![temp_humidity](visuals/interaction_temp_humidity.png)
+
+### Interaction Effect — Travel Distance × Bookmaker Probability
+![travel_bookmaker](visuals/interaction_travel_bookmaker.png)
+
+### ROC Curve (Logistic Regression)
+![roc_logit](visuals/roc_curve_logistic_regression.png)
+
+### Partial Dependence — Temperature
+![pdp_temp](visuals/pdp_temp.png)
+
+
 6. Key Insights
 
 1. Weather conditions materially impact results.
