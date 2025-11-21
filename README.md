@@ -177,10 +177,10 @@ Develop a real-time prediction dashboard or API
 
 Released under the MIT License.
 
-9. Author
+Contact
 
-Arnav Jain
-Master’s in Data Science (University of Virginia)
-LinkedIn: https://www.linkedin.com/in/arnavjain2026
+Arnav Jain Master of Science in Data Science, University of Virginia LinkedIn: https://www.linkedin.com/in/arnavjain2026/
+
+For collaboration or football-analytics opportunities, feel free to reach out.
 
 
